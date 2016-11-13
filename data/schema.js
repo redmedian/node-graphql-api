@@ -1,7 +1,20 @@
 // Подключаем GraphQL
 var graphql = require('graphql');
 // Подключаем БД (в нашем случае это файл с данными)
-var data = require('./data.json');
+var data = require('./database');
+
+// Создаем тип Message
+var messageType = new graphql.GraphQLObjectType({
+    name:'Message',
+    fields:{
+        id:{
+            type:graphql.GraphQLInt
+        },
+        text:{
+            type:graphql.GraphQLString
+        }
+    }
+});
 
 // Создаем тип User
 var userType = new graphql.GraphQLObjectType({
@@ -11,7 +24,13 @@ var userType = new graphql.GraphQLObjectType({
             type:graphql.GraphQLString
         },
         id:{
-            type:graphql.GraphQLString
+            type:graphql.GraphQLInt
+        },
+        messages: {
+            type:new graphql.GraphQLList(messageType),
+            resolve: function (root, args) {
+                return data.getMessages(root.id)
+            }
         }
     }
 });
@@ -27,9 +46,9 @@ var queryType = new graphql.GraphQLObjectType({
                     type:graphql.GraphQLString
                 }
             },
-            // эти два аргумента root и args мы будем использовать для выборки данных из массива data.json
+            // эти два аргумента root и args мы будем использовать для выборки данных из database.js
             resolve:function (root, args) {
-                return data[args.id];
+                return data.users[args.id];
             }
         }
 
