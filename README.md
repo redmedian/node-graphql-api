@@ -19,7 +19,7 @@ value: { user(id: "1") {name messages {text}} }
 
 ## Http request:
 ```
-GET: http://127.0.0.1:8080/graphql?query={user(id: "1"){name messages {text}}}
+GET: http://127.0.0.1:3000/graphql?query={user(id: "1"){name messages {text}}}
 ```
 
 ## Result:
@@ -44,4 +44,3 @@ GET: http://127.0.0.1:8080/graphql?query={user(id: "1"){name messages {text}}}
 ## Links:
 
 [Getting started graphql, part 1](https://www.youtube.com/watch?v=rm1GalQIoXI)
-
