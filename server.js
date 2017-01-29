@@ -9,7 +9,7 @@ var schema = require('./data/schema');
 // проинициализируем наше express приложение
 var app = express();
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 
 app.use('/graphql', graphQL({ schema:schema, pretty:true }));
 
